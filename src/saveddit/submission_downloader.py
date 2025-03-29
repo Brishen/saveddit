@@ -139,6 +139,12 @@ class SubmissionDownloader:
                     self.indent_1 + "This is an imgur image or video")
                 self.download_imgur_image(submission, files_dir)
                 success = True
+            elif self.is_l3n_image(submission.url):
+                files_dir = create_files_dir(submission_dir)
+                self.logger.spam(
+                    self.indent_1 + "This is an L3N image")
+                self.download_l3n_image(submission, files_dir)
+                success = True
             elif self.is_self_post(submission):
                 self.logger.spam(self.indent_1 + "This is a self-post")
                 success = True
@@ -680,3 +686,15 @@ class SubmissionDownloader:
 
         with open(os.path.join(submission_dir, "submission.json"), 'w') as file:
             file.write(json.dumps(submission_dict, indent=2))
+        
+    def is_l3n_image(self, url):
+        return "l3n.co/i/" in url
+
+    def download_l3n_image(self, submission, output_dir):
+        filename = submission.url.split("/")[-1]
+        save_path = os.path.join(output_dir, filename)
+        try:
+            urllib.request.urlretrieve(submission.url, save_path)
+            self.logger.spam(self.indent_2 + "Downloaded L3N image to " + save_path)
+        except Exception as e:
+            self.print_formatted_error(e)
