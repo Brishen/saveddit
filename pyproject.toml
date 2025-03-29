@@ -1,0 +1,25 @@
+[project]
+name = "saveddit"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.13.3",
+    "colorama>=0.4.6",
+    "coloredlogs>=15.0.1",
+    "ffmpeg-python>=0.2.0",
+    "praw>=7.8.1",
+    "pyyaml>=6.0.2",
+    "requests>=2.32.3",
+    "tqdm>=4.67.1",
+    "verboselogs>=1.7",
+    "youtube-dl>=2021.12.17",
+]
+
+[project.scripts]
+saveddit = "saveddit.saveddit:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
