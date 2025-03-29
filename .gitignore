@@ -140,3 +140,4 @@ cython_debug/
 
 # Configuration file
 **/user_config.yaml
+.aider*
